@@ -17,15 +17,30 @@ const initialState:IMovieInitialState = {
 }
 
 
+// const getAll = createAsyncThunk<IMoviesService, {
+//     currentPage: number,
+//     selectedGenres: string,
+//     sortedBy: string
+// }>(
+//     'movieSlice/getAll',
+//     async ({currentPage,selectedGenres,sortedBy},{rejectWithValue})=>{
+//         try {
+//             let {data} = await movieService.getAll(currentPage,selectedGenres,sortedBy);
+//             return data
+//         }catch (e) {
+//             const error = e as AxiosError;
+//             return rejectWithValue(error.message)
+//         }
+//     }
+// )
+
 const getAll = createAsyncThunk<IMoviesService, {
     currentPage: number,
-    selectedGenres: string,
-    sortBy: string
 }>(
     'movieSlice/getAll',
-    async ({currentPage,selectedGenres,sortBy},{rejectWithValue})=>{
+    async ({currentPage},{rejectWithValue})=>{
         try {
-            let {data} = await movieService.getAll(currentPage,selectedGenres,sortBy);
+            let {data} = await movieService.getAll(currentPage);
             return data
         }catch (e) {
             const error = e as AxiosError;
