@@ -1,10 +1,10 @@
 import {FC} from "react";
 
-interface IProps {
 
-}
+const MovieListPage: FC = () => {
 
-const MovieListPage: FC<IProps> = () => {
+
+
     return (
         <div>
             MovieListPage

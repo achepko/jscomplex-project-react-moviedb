@@ -74,3 +74,14 @@ export interface IMoviesService {
     total_results: number,
     total_pages: number
 }
+
+export interface IMovieInitialState {
+    page: number,
+    movies: IMovie[],
+    nowPlayingMovies: IMovie[],
+    trendingMovies: IMovie[],
+    total_results: number,
+    total_pages: number,
+    currentPage: number,
+    loading:boolean
+}
