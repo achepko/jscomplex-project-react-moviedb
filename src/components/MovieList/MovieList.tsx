@@ -30,7 +30,7 @@ const MovieList: FC = () => {
         <div>
             <Header/>
             {movies.map(movie=> <MovieListInfo key={movie.id} movie={movie} />)}
-            Pagination
+            <Pagination/>
             <Footer/>
         </div>
     );

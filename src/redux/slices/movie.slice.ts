@@ -100,6 +100,7 @@ let slice = createSlice({
             .addCase(getAll.fulfilled, (state, action) => {
                 state.movies = action.payload.results
                 state.total_pages = action.payload.total_pages <= 500 ? action.payload.total_pages : 500;
+                state.currentPage = action.payload.page
             })
             .addCase(getMovieById.fulfilled, (state, action) => {
                 state.movieInfo = action.payload
