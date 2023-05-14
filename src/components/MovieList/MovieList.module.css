@@ -1,0 +1,9 @@
+.MovieList{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-items: center;
+    justify-content: center;
+    row-gap: 10px;
+    column-gap: 10px;
+}

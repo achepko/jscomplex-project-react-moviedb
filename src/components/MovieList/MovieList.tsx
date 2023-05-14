@@ -1,6 +1,7 @@
 import {FC, useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 
+import css from './MovieList.module.css'
 import {movieActions} from "../../redux";
 import {MovieListInfo} from "../MovieListInfo/MovieListInfo";
 import {Header} from "../Header/Header";
@@ -29,7 +30,9 @@ const MovieList: FC = () => {
     return (
         <div>
             <Header/>
-            {movies.map(movie=> <MovieListInfo key={movie.id} movie={movie} />)}
+            <hr/>
+            <div className={css.MovieList}>{movies.map(movie => <MovieListInfo key={movie.id} movie={movie}/>)}</div>
+            <hr/>
             <Pagination/>
             <Footer/>
         </div>
