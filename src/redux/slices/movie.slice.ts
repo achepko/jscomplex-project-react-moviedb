@@ -4,7 +4,7 @@ import {AxiosError} from "axios";
 import {IMovieDetails, IMovieInitialState, IMoviesService} from "../../interfaces";
 import {movieService} from "../../services";
 
-const initialMovieDetials = {
+const initialMovieDetails = {
     adult: false,
     backdrop_path: '',
     belongs_to_collection: null,
@@ -41,7 +41,7 @@ const initialState: IMovieInitialState = {
     total_results: 0,
     total_pages: 500,
     loading: false,
-    movieInfo: initialMovieDetials
+    movieInfo: initialMovieDetails
 }
 
 

@@ -3,6 +3,8 @@ import {FC, useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {movieActions} from "../../redux";
 import {useParams} from "react-router-dom";
+import {Header} from "../Header/Header";
+import {Footer} from "../Footer/Footer";
 
 
 interface IParam {
@@ -26,6 +28,7 @@ const MovieDetails: FC = () => {
     return (
 
             <div>
+                <Header/>
                 {movieInfo &&  (
                     <div>
                         {movieInfo.title && <h2>{movieInfo.title}</h2>}
@@ -33,6 +36,7 @@ const MovieDetails: FC = () => {
                         {movieInfo.release_date && <p>{movieInfo.release_date}</p>}
                     </div>
                 )}
+                <Footer/>
             </div>
 
     );

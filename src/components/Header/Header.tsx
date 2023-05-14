@@ -12,7 +12,7 @@ const Header: FC = () => {
             <h3>HEADER</h3>
             <div>LOGO</div>
             <button onClick={()=>navigate('/')}>MAIN page</button>
-            <button onClick={()=>navigate('discover/movie')}>MovieList</button>
+            <button onClick={()=>navigate('/discover/movie')}>MovieList</button>
             <div>SEARCH</div>
             <div>LOG IN</div>
         </div>

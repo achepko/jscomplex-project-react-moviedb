@@ -1,6 +1,8 @@
 import {FC} from "react";
-import {IMovie} from "../../interfaces";
 import {Link} from "react-router-dom";
+
+import {IMovie} from "../../interfaces";
+import {MoviePoster} from "../MoviePoster/MoviePoster";
 
 interface IProps {
     movie: IMovie
@@ -8,17 +10,16 @@ interface IProps {
 
 const MovieListInfo: FC<IProps> = ({movie}) => {
 
-    let {id, title, genre_ids, poster_path, vote_average, release_date} = movie;
+    let {id, title, genre_ids, poster_path, vote_average, release_date, adult} = movie;
 
     return (
         <div>
             <Link to={`${id}`}>
-                <div>POSTER</div>
+                <MoviePoster src={poster_path} alt={title} genre_ids={genre_ids} adult={adult}/>
+                <div>title:{title}</div>
             </Link>
             <div>id:{id}</div>
-            <div>title:{title}</div>
             <div>genre_ids:{genre_ids}</div>
-            <div>poster_path:{poster_path}</div>
             <div>vote_average:{vote_average}</div>
             <div>release_date:{release_date}</div>
             <hr/>

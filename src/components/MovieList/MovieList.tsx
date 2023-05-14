@@ -5,6 +5,7 @@ import {movieActions} from "../../redux";
 import {MovieListInfo} from "../MovieListInfo/MovieListInfo";
 import {Header} from "../Header/Header";
 import {Footer} from "../Footer/Footer";
+import {Pagination} from "../Pagination/Pagination";
 
 const MovieList: FC = () => {
 
@@ -29,6 +30,7 @@ const MovieList: FC = () => {
         <div>
             <Header/>
             {movies.map(movie=> <MovieListInfo key={movie.id} movie={movie} />)}
+            Pagination
             <Footer/>
         </div>
     );
