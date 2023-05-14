@@ -1,0 +1,8 @@
+.Header{
+    background: cornflowerblue;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    justify-items: center;
+    height: 80px;
+}

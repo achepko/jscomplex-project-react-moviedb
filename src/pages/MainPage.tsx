@@ -1,13 +1,18 @@
 import {FC} from "react";
 
-interface IProps {
+import {Header} from "../components/Header/Header";
+import {MovieOfDay} from "../components/MovieOfDay/MovieOfDay";
+import {MovieListNew} from "../components/MovieListNews/MovieListNew";
+import {Footer} from "../components/Footer/Footer";
 
-}
 
-const MainPage: FC<IProps> = () => {
+const MainPage: FC = () => {
     return (
         <div>
-            MainPage
+            <Header/>
+            <MovieOfDay/>
+            <MovieListNew/>
+            <Footer/>
         </div>
     );
 };

@@ -1,7 +1,7 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, isFulfilled} from "@reduxjs/toolkit";
 import {AxiosError} from "axios";
 
-import {IMovieInitialState, IMoviesService} from "../../interfaces";
+import {IMovieInfo, IMovieInitialState, IMoviesService} from "../../interfaces";
 import {movieService} from "../../services";
 
 
@@ -12,8 +12,9 @@ const initialState:IMovieInitialState = {
     page: 1,
     currentPage: 1,
     total_results: 0,
-    total_pages: 200,
-    loading:false
+    total_pages: 500,
+    loading:false,
+    movieInfo:{}
 }
 
 
@@ -49,6 +50,18 @@ const getAll = createAsyncThunk<IMoviesService, {
     }
 )
 
+const getMovieById = createAsyncThunk<IMovieInfo,{id:string}>(
+    'movieSlice/getMovieById',
+    async ({id},{rejectWithValue})=>{
+        try {
+            let {data} = await movieService.getMovieById(id);
+            return data
+        }catch (e) {
+            const error = e as AxiosError;
+            return rejectWithValue(error.message)
+        }
+    }
+)
 
 let slice = createSlice({
     name:'movieSlice',
@@ -60,7 +73,12 @@ let slice = createSlice({
         builder
             .addCase(getAll.fulfilled,(state, action)=>{
                 state.movies = action.payload.results
-                state.total_pages = action.payload.total_pages <= 200 ? action.payload.total_pages : 200;
+                state.total_pages = action.payload.total_pages <= 500 ? action.payload.total_pages : 500;
+            })
+            .addCase(getMovieById.fulfilled,(state, action)=>{
+                state.movieInfo=action.payload
+            })
+            .addMatcher(isFulfilled(),state => {
                 state.loading = false
             })
 
@@ -72,7 +90,8 @@ let {actions,reducer:movieReducer} = slice;
 
 const movieActions ={
     ...actions,
-    getAll
+    getAll,
+    getMovieById
 }
 
 export {

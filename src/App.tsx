@@ -1,9 +1,9 @@
 import React from 'react';
-import {Navigate, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 
 import {MainLayout} from "./layouts";
-import {MainPage, MovieListPage, SearchPage} from "./pages";
-import {MovieInfo} from "./components";
+import {MainPage, MovieDetailsPage, MovieListPage, SearchPage} from "./pages";
+import './styles/App.css'
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
        <Route path={''} element={<MainLayout/>}>
            <Route index element={<MainPage/>}/>
            <Route path={'discover/movie'} element={<MovieListPage/>}/>
-           <Route path={'discover/movie:id'} element={<MovieInfo/>}/>
+           <Route path={'discover/movie:id'} element={<MovieDetailsPage/>}/>
            <Route path={'search'} element={<SearchPage/>}/>
 
        </Route>
