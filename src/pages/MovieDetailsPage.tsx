@@ -7,7 +7,7 @@ const MovieDetailsPage: FC = () => {
     return (
         <div>
             <MovieDetails/>
-            test
+
         </div>
     );
 };

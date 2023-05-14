@@ -7,6 +7,7 @@ const tokenAccess = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZWI3ZjQ1MGNmNDljNTZkZTc4ZD
 
 const urls = {
     discover_movie:'/discover/movie',
+    movie:'./movie',
     genre: '/genre',
     search:'/search',
     account:'/account',

@@ -5,28 +5,36 @@ import {movieActions} from "../../redux";
 import {useParams} from "react-router-dom";
 
 
+interface IParam {
+    [key: string]: string | undefined;
+    id: string;
+}
 
 const MovieDetails: FC = () => {
 
-    let {id} = useParams<{ id: string }>();
-
     let {movieInfo} = useAppSelector(state => state.movies);
-
+    let {id} = useParams<IParam>();
     let dispatch = useAppDispatch();
+    console.log(movieInfo)
 
     useEffect(()=>{
         if (id){
         dispatch(movieActions.getMovieById({id}))
         }
-    },[dispatch,id])
+    },[id])
 
     return (
-        <div>
-                <div>
-                    MovieDetails
-                    {/*<div>id:{movieInfo.id}</div>*/}
-                </div>
-        </div>
+
+            <div>
+                {movieInfo &&  (
+                    <div>
+                        {movieInfo.title && <h2>{movieInfo.title}</h2>}
+                        {movieInfo.overview && <p>{movieInfo.overview}</p>}
+                        {movieInfo.release_date && <p>{movieInfo.release_date}</p>}
+                    </div>
+                )}
+            </div>
+
     );
 };
 

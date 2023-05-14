@@ -40,7 +40,7 @@ export interface ISpoken_languages {
     iso_639_1: string,
     name: string,
 }
-export interface IMovieInfo {
+export interface IMovieDetails {
     adult: boolean,
     backdrop_path: string,
     belongs_to_collection: null,
@@ -84,5 +84,5 @@ export interface IMovieInitialState {
     total_pages: number,
     currentPage: number,
     loading:boolean,
-    movieInfo:{}
+    movieInfo: IMovieDetails
 }
