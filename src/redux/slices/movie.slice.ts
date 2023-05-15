@@ -94,7 +94,11 @@ const getMovieById = createAsyncThunk<IMovieDetails, { id: string }>(
 let slice = createSlice({
     name: 'movieSlice',
     initialState,
-    reducers: {},
+    reducers: {
+        changePage:(state, action)=>{
+            state.currentPage = action.payload
+        }
+    },
     extraReducers: builder =>
         builder
             .addCase(getAll.fulfilled, (state, action) => {
@@ -117,7 +121,7 @@ let {actions, reducer: movieReducer} = slice;
 const movieActions = {
     ...actions,
     getAll,
-    getMovieById
+    getMovieById,
 }
 
 export {

@@ -1,4 +1,4 @@
-import {FC, useEffect} from "react";
+import React, {FC, useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 
 import css from './MovieList.module.css'
@@ -6,7 +6,7 @@ import {movieActions} from "../../redux";
 import {MovieListInfo} from "../MovieListInfo/MovieListInfo";
 import {Header} from "../Header/Header";
 import {Footer} from "../Footer/Footer";
-import {Pagination} from "../Pagination/Pagination";
+import {PaginationNumbers} from "../Pagination/Pagination";
 
 const MovieList: FC = () => {
 
@@ -33,7 +33,7 @@ const MovieList: FC = () => {
             <hr/>
             <div className={css.MovieList}>{movies.map(movie => <MovieListInfo key={movie.id} movie={movie}/>)}</div>
             <hr/>
-            <Pagination/>
+            <PaginationNumbers/>
             <Footer/>
         </div>
     );

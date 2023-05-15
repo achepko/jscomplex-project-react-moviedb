@@ -5,7 +5,7 @@ import {movieActions} from "../../redux";
 
 interface IProps {
     pageNumber: number,
-    isActive: boolean
+    isActive: boolean,
 }
 
 const PageNumber: FC<IProps> = ({pageNumber,isActive}) => {
