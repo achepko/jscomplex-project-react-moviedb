@@ -45,15 +45,15 @@ const initialState: IMovieInitialState = {
 }
 
 
-// const getAll = createAsyncThunk<IMoviesService, {
+// const getMovies = createAsyncThunk<IMoviesService, {
 //     currentPage: number,
 //     selectedGenres: string,
 //     sortedBy: string
 // }>(
-//     'movieSlice/getAll',
+//     'movieSlice/getMovies',
 //     async ({currentPage,selectedGenres,sortedBy},{rejectWithValue})=>{
 //         try {
-//             let {data} = await movieService.getAll(currentPage,selectedGenres,sortedBy);
+//             let {data} = await movieService.getMovies(currentPage,selectedGenres,sortedBy);
 //             return data
 //         }catch (e) {
 //             const error = e as AxiosError;
@@ -62,10 +62,10 @@ const initialState: IMovieInitialState = {
 //     }
 // )
 
-const getAll = createAsyncThunk<IMoviesService, {
+const getMovies = createAsyncThunk<IMoviesService, {
     currentPage: number,
 }>(
-    'movieSlice/getAll',
+    'movieSlice/getMovies',
     async ({currentPage}, {rejectWithValue}) => {
         try {
             let {data} = await movieService.getAll(currentPage);
@@ -97,11 +97,14 @@ let slice = createSlice({
     reducers: {
         changePage:(state, action)=>{
             state.currentPage = action.payload
+        },
+        resetPage:(state)=>{
+            state.currentPage=1
         }
     },
     extraReducers: builder =>
         builder
-            .addCase(getAll.fulfilled, (state, action) => {
+            .addCase(getMovies.fulfilled, (state, action) => {
                 state.movies = action.payload.results
                 state.total_pages = action.payload.total_pages <= 500 ? action.payload.total_pages : 500;
                 state.currentPage = action.payload.page
@@ -120,7 +123,7 @@ let {actions, reducer: movieReducer} = slice;
 
 const movieActions = {
     ...actions,
-    getAll,
+    getMovies,
     getMovieById,
 }
 

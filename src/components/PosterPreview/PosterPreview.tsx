@@ -1,7 +1,7 @@
 import {FC} from "react";
 
 import {posterURL} from "../../constants";
-import css from './MoviePoster.module.css'
+import css from './PosterPreview.module.css'
 
 interface IMoviePosterProps {
     src: string,
@@ -10,7 +10,7 @@ interface IMoviePosterProps {
     adult:boolean
 }
 
-const MoviePoster: FC<IMoviePosterProps> = ({src,alt,genre_ids,adult}) => {
+const PosterPreview: FC<IMoviePosterProps> = ({src,alt,genre_ids,adult}) => {
     return (
         <div className={css.MoviePoster}>
             <img src={`${posterURL}/${src}`} alt={`${alt}`}/>
@@ -18,4 +18,4 @@ const MoviePoster: FC<IMoviePosterProps> = ({src,alt,genre_ids,adult}) => {
     );
 };
 
-export {MoviePoster};
+export {PosterPreview};

@@ -1,12 +1,12 @@
 import {FC} from "react";
 
-import {MovieDetails} from "../components";
+import {MovieInfo} from "../components";
 
 
 const MovieDetailsPage: FC = () => {
     return (
         <div>
-            <MovieDetails/>
+            <MovieInfo/>
 
         </div>
     );

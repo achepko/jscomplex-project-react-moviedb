@@ -3,7 +3,7 @@ import {Route, Routes} from "react-router-dom";
 
 import {MainLayout} from "./layouts";
 import {MainPage, MovieDetailsPage, MovieListPage, SearchPage} from "./pages";
-import './styles/App.css'
+import './styles/global.css'
 
 function App() {
   return (

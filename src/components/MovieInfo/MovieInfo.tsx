@@ -12,7 +12,7 @@ interface IParam {
     id: string;
 }
 
-const MovieDetails: FC = () => {
+const MovieInfo: FC = () => {
 
     let {movieInfo} = useAppSelector(state => state.movies);
     let {id} = useParams<IParam>();
@@ -42,4 +42,4 @@ const MovieDetails: FC = () => {
     );
 };
 
-export {MovieDetails};
+export {MovieInfo};

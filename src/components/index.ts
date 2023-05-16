@@ -1,1 +1,1 @@
-export * from './MovieDetails/MovieDetails'
+export * from './MovieInfo/MovieInfo'

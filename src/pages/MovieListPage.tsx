@@ -1,12 +1,12 @@
 import {FC} from "react";
 
-import {MovieList} from "../components/MovieList/MovieList";
+import {MoviesList} from "../components/MoviesList/MoviesList";
 
 const MovieListPage: FC = () => {
 
     return (
         <div>
-            <MovieList/>
+            <MoviesList/>
         </div>
     );
 };

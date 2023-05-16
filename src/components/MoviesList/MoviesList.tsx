@@ -1,14 +1,15 @@
 import React, {FC, useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 
-import css from './MovieList.module.css'
+import css from './MoviesList.module.css'
 import {movieActions} from "../../redux";
-import {MovieListInfo} from "../MovieListInfo/MovieListInfo";
+import {MovieListCard} from "../MovieListCard/MovieListCard";
 import {Header} from "../Header/Header";
 import {Footer} from "../Footer/Footer";
-import {PaginationNumbers} from "../Pagination/Pagination";
+import {PaginationNumbers} from "../PaginationNumbers/PaginationNumbers";
+import {GenreList} from "../GenreList/GenreList";
 
-const MovieList: FC = () => {
+const MoviesList: FC = () => {
 
     let {movies,currentPage,total_pages,loading} = useAppSelector(state => state.movies);
 
@@ -23,15 +24,17 @@ const MovieList: FC = () => {
     useEffect(()=>{
         let selectedGenres='dasd'
         let sortedBy='das'
-        dispatch(movieActions.getAll({currentPage}))
+        dispatch(movieActions.getMovies({currentPage}))
     },[dispatch])
 
 
     return (
         <div>
             <Header/>
+            <GenreList/>
+            <p> hided - filtes by genre/date/rate</p>
             <hr/>
-            <div className={css.MovieList}>{movies.map(movie => <MovieListInfo key={movie.id} movie={movie}/>)}</div>
+            <div className={css.MovieList}>{movies.map(movie => <MovieListCard key={movie.id} movie={movie}/>)}</div>
             <hr/>
             <PaginationNumbers/>
             <Footer/>
@@ -39,4 +42,4 @@ const MovieList: FC = () => {
     );
 };
 
-export {MovieList};
+export {MoviesList};
