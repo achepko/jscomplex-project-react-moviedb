@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {Pagination, PaginationItem} from "@mui/material";
+import {Pagination} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 
 import {useAppDispatch, useAppSelector} from "../../hooks";

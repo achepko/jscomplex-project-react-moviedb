@@ -23,7 +23,7 @@ const MovieInfo: FC = () => {
         if (id){
         dispatch(movieActions.getMovieById(id))
         }
-    },[id])
+    },[dispatch,id])
 
     return (
 
