@@ -7,7 +7,7 @@ import {movieActions} from "../../redux";
 import {MovieListCard} from "../MovieListCard/MovieListCard";
 import {Header} from "../Header/Header";
 import {Footer} from "../Footer/Footer";
-import {PaginationNumbers} from "../PaginationNumbers/PaginationNumbers";
+import {PaginationMovies} from "../PaginationMovies/PaginationMovies";
 import {GenreList} from "../GenreList/GenreList";
 
 const MoviesList: FC = () => {
@@ -32,7 +32,7 @@ const MoviesList: FC = () => {
             <hr/>
             <div className={css.MovieList}>{movies.map(movie => <MovieListCard key={movie.id} movie={movie}/>)}</div>
             <hr/>
-            <PaginationNumbers/>
+            <PaginationMovies/>
             <Footer/>
         </div>
     );

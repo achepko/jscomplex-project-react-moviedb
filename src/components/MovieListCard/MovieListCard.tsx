@@ -13,7 +13,7 @@ interface IProps {
 
 const MovieListCard: FC<IProps> = ({movie}) => {
 
-    let {id, title, genre_ids, poster_path, vote_average, release_date, adult} = movie;
+    let {id, title, genre_ids, poster_path, vote_average,vote_count, release_date, adult} = movie;
 
 
     const movieRating = vote_average ? Math.round(vote_average)/2:0
@@ -36,7 +36,7 @@ const MovieListCard: FC<IProps> = ({movie}) => {
                 defaultValue={movieRating}
                 precision={0.5}
                 max={5}
-            /> {vote_average}</div>
+            /> {vote_average}{vote_count}</div>
 
         </div>
 

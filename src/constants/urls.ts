@@ -6,10 +6,12 @@ const tokenAccess = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZWI3ZjQ1MGNmNDljNTZkZTc4ZD
 
 
 const urls = {
-    discover_movie:'/discover/movie',
     movie:'./movie',
-    genre: 'genre/movie/list',
+    discover_movie:'/discover/movie',
     search_movie:'/search/movie',
+    movie_popular:'/movie/popular',
+    movie_top_rated:'/movie/top_rated',
+    genre: 'genre/movie/list',
     account:'/account',
 }
 

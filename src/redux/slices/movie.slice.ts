@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice, isFulfilled} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, isFulfilled, isPending} from "@reduxjs/toolkit";
 import {AxiosError} from "axios";
 
 import {IMovieDetails, IMovieInitialState, IMoviesService} from "../../interfaces";
@@ -88,6 +88,32 @@ const getMovieById = createAsyncThunk<IMovieDetails,string>(
     }
 )
 
+const getPopularMovies = createAsyncThunk<IMoviesService, number>(
+    'movieSlice/getPopularMovies',
+    async (currentPage, {rejectWithValue}) => {
+        try {
+            const {data} = await movieService.getPopularMovies();
+            return data
+        } catch (e) {
+            const error = e as AxiosError;
+            return rejectWithValue(error.message)
+        }
+    }
+)
+
+const getTopRatedMovies = createAsyncThunk<IMoviesService, void>(
+    'movieSlice/getTopRatedMovies',
+    async (_, {rejectWithValue}) => {
+        try {
+            const {data} = await movieService.getTopRatedMovies();
+            return data
+        } catch (e) {
+            const error = e as AxiosError;
+            return rejectWithValue(error.message)
+        }
+    }
+)
+
 let slice = createSlice({
     name: 'movieSlice',
     initialState,
@@ -109,8 +135,21 @@ let slice = createSlice({
             .addCase(getMovieById.fulfilled, (state, action) => {
                 state.movieInfo = action.payload
             })
+            .addCase(getPopularMovies.fulfilled,(state, action)=>{
+                state.movies = action.payload.results
+                state.total_pages = action.payload.total_pages <= 500 ? action.payload.total_pages : 500;
+                state.currentPage = action.payload.page
+            })
+            .addCase(getTopRatedMovies.fulfilled,(state, action)=>{
+                state.movies = action.payload.results
+                // state.total_pages = action.payload.total_pages <= 500 ? action.payload.total_pages : 500;
+                // state.currentPage = action.payload.page
+            })
             .addMatcher(isFulfilled(), state => {
                 state.loading = false
+            })
+            .addMatcher(isPending(),state => {
+                state.loading = true
             })
 
 });
@@ -122,11 +161,12 @@ const movieActions = {
     ...actions,
     getMovies,
     getMovieById,
+    getPopularMovies,
+    getTopRatedMovies
 }
 
 export {
     movieActions,
     movieReducer,
-
 }
 

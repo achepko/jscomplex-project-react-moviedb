@@ -4,10 +4,9 @@ import {useNavigate} from "react-router-dom";
 
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {movieActions} from "../../redux";
-import css from './Pagination.module.css'
+import css from './PaginationMovies.module.css'
 
-
-const PaginationNumbers: FC = () => {
+const PaginationMovies: FC = () => {
 
     const {currentPage, total_pages} = useAppSelector(state => state.movies);
 
@@ -15,7 +14,7 @@ const PaginationNumbers: FC = () => {
     const navigate = useNavigate();
 
     return (
-        <div className={css.Pagination}>
+        <div className={css.PaginationMovies}>
             <Pagination
                 count={total_pages}
                 page={currentPage}
@@ -30,5 +29,5 @@ const PaginationNumbers: FC = () => {
     );
 };
 
-export {PaginationNumbers};
+export {PaginationMovies};
 

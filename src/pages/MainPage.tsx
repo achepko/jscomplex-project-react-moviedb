@@ -1,8 +1,8 @@
 import {FC} from "react";
 
 import {Header} from "../components/Header/Header";
-import {MovieOfDay} from "../components/MovieOfDay/MovieOfDay";
-import {MovieListNew} from "../components/MovieListNews/MovieListNew";
+import {MovieTopRated} from "../components/MovieTopRated/MovieTopRated";
+import {MoviePopularList} from "../components/MoviePopularList/MoviePopularList";
 import {Footer} from "../components/Footer/Footer";
 import {GenreList} from "../components/GenreList/GenreList";
 
@@ -11,10 +11,10 @@ const MainPage: FC = () => {
     return (
         <div>
             <Header/>
-            <MovieOfDay/>
+            <MovieTopRated/>
             <GenreList/>
             <p> hided - filtes by genre/date/rate</p>
-            <MovieListNew/>
+            <MoviePopularList/>
             <Footer/>
         </div>
     );
