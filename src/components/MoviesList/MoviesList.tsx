@@ -40,32 +40,3 @@ const MoviesList: FC = () => {
 
 export {MoviesList};
 
-// const {page} = useParams<page:string>();
-
-// const location = useLocation()
-//
-// const searchParams = new URLSearchParams(location.search);
-// const pageFromURL = searchParams.get('page');
-
-// useEffect(()=>{
-//     let selectedGenres='dasd'
-//     let sortedBy='das'
-//     dispatch(movieActions.getAll({currentPage,selectedGenres,sortedBy}))
-// },[dispatch])
-
-// let selectedGenres='dasd'
-// let sortedBy='das'
-
-
-// key={page} pageNew={pageNew}
-
-// const {page} = useParams<{page:string}>();
-//
-// const pageNew = page ? +page : 1
-// console.log(pageNew)
-//
-// useEffect(()=>{
-//
-//
-//     pageNew && dispatch(movieActions.getMovies(+pageNew))
-// },[dispatch,pageNew])

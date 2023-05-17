@@ -1,23 +1,18 @@
-import {FC, useEffect} from "react";
-import {Pagination} from "@mui/material";
+import {FC} from "react";
+import {Pagination, PaginationItem} from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {movieActions} from "../../redux";
 import css from './Pagination.module.css'
-import {useNavigate, useParams} from "react-router-dom";
 
 
-interface IProps {
-
-}
-
-const PaginationNumbers: FC<IProps> = () => {
+const PaginationNumbers: FC = () => {
 
     const {currentPage, total_pages} = useAppSelector(state => state.movies);
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-
 
     return (
         <div className={css.Pagination}>
@@ -30,21 +25,10 @@ const PaginationNumbers: FC<IProps> = () => {
                 onChange={(_, page: number) => {
                     dispatch(movieActions.changePage(page))
                     navigate(`?page=${page}`);
-                }}
-
-            />
+                }}/>
         </div>
     );
 };
 
 export {PaginationNumbers};
 
-
-// const {page} = useParams<{page:string}>();
-//
-// const pageNew = page ? +page : 1
-// console.log(pageNew)
-
-// const {page} = useParams<{page:string}>();
-
-// /discover/movie
