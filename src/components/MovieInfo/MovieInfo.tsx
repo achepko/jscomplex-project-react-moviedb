@@ -21,7 +21,7 @@ const MovieInfo: FC = () => {
 
     useEffect(()=>{
         if (id){
-        dispatch(movieActions.getMovieById({id}))
+        dispatch(movieActions.getMovieById(id))
         }
     },[id])
 

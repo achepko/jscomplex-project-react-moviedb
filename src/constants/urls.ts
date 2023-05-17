@@ -9,7 +9,7 @@ const urls = {
     discover_movie:'/discover/movie',
     movie:'./movie',
     genre: 'genre/movie/list',
-    search:'/search',
+    search_movie:'/search/movie',
     account:'/account',
 }
 

@@ -36,7 +36,6 @@ const initialState: IMovieInitialState = {
     trendingMovies: [],
     nowPlayingMovies: [],
     movies: [],
-    page: 1,
     currentPage: 1,
     total_results: 0,
     total_pages: 500,
@@ -62,11 +61,9 @@ const initialState: IMovieInitialState = {
 //     }
 // )
 
-const getMovies = createAsyncThunk<IMoviesService, {
-    currentPage: number,
-}>(
+const getMovies = createAsyncThunk<IMoviesService,number>(
     'movieSlice/getMovies',
-    async ({currentPage}, {rejectWithValue}) => {
+    async (currentPage, {rejectWithValue}) => {
         try {
             let {data} = await movieService.getAll(currentPage);
             return data
@@ -77,9 +74,9 @@ const getMovies = createAsyncThunk<IMoviesService, {
     }
 )
 
-const getMovieById = createAsyncThunk<IMovieDetails, { id: string }>(
+const getMovieById = createAsyncThunk<IMovieDetails,string>(
     'movieSlice/getMovieById',
-    async ({id}, {rejectWithValue}) => {
+    async (id, {rejectWithValue}) => {
         try {
             let {data} = await movieService.getMovieById(id);
             return data

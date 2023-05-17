@@ -4,18 +4,20 @@ import {Pagination} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {movieActions} from "../../redux";
 import css from './Pagination.module.css'
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
-const PaginationNumbers: FC = () => {
+
+interface IProps {
+
+}
+
+const PaginationNumbers: FC<IProps> = () => {
 
     const {currentPage, total_pages} = useAppSelector(state => state.movies);
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    useEffect(()=>{
-        dispatch(movieActions.getMovies({currentPage }));
-    },[dispatch,currentPage])
 
     return (
         <div className={css.Pagination}>
@@ -25,9 +27,9 @@ const PaginationNumbers: FC = () => {
                 shape="rounded"
                 size="large"
                 variant="outlined" color="primary"
-                onChange={(_,page: number)=>{
+                onChange={(_, page: number) => {
                     dispatch(movieActions.changePage(page))
-                    navigate(`/discover/movie?page=${page}`);
+                    navigate(`?page=${page}`);
                 }}
 
             />
@@ -36,3 +38,13 @@ const PaginationNumbers: FC = () => {
 };
 
 export {PaginationNumbers};
+
+
+// const {page} = useParams<{page:string}>();
+//
+// const pageNew = page ? +page : 1
+// console.log(pageNew)
+
+// const {page} = useParams<{page:string}>();
+
+// /discover/movie
