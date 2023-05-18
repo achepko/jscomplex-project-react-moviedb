@@ -77,11 +77,12 @@ export interface IMoviesService {
 
 export interface IMovieInitialState {
     movies: IMovie[],
+    topRatedMovies: IMovie[],
     nowPlayingMovies: IMovie[],
-    trendingMovies: IMovie[],
     total_results: number,
     total_pages: number,
     currentPage: number,
+    // currentPage2: number,
     loading:boolean,
     movieInfo: IMovieDetails
 }

@@ -1,20 +1,18 @@
 import {FC} from "react";
 import {Pagination} from "@mui/material";
-import {useNavigate} from "react-router-dom";
 
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {movieActions} from "../../redux";
-import css from './PaginationMoviesPopular.module.css'
+import css from './PaginationMoviesTopRated.module.css'
 
-const PaginationMoviesPopular: FC = () => {
+const PaginationMoviesTopRated: FC = () => {
 
     const {currentPage, total_pages} = useAppSelector(state => state.movies);
 
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
 
     return (
-        <div className={css.PaginationMoviesPopular}>
+        <div className={css.PaginationMoviesTopRated}>
             <Pagination
                 count={total_pages}
                 page={currentPage}
@@ -23,11 +21,11 @@ const PaginationMoviesPopular: FC = () => {
                 variant="outlined" color="primary"
                 onChange={(_, page: number) => {
                     dispatch(movieActions.changePage(page))
-                    navigate(`?page=${page}`);
+                    // navigate(`?page=${page}`);
                 }}/>
         </div>
     );
 };
 
-export {PaginationMoviesPopular};
+export {PaginationMoviesTopRated};
 

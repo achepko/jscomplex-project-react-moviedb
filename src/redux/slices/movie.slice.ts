@@ -33,10 +33,11 @@ const initialMovieDetails = {
 }
 
 const initialState: IMovieInitialState = {
-    trendingMovies: [],
+    topRatedMovies: [],
     nowPlayingMovies: [],
     movies: [],
     currentPage: 1,
+    // currentPage2: 1,
     total_results: 0,
     total_pages: 500,
     loading: false,
@@ -88,11 +89,11 @@ const getMovieById = createAsyncThunk<IMovieDetails,string>(
     }
 )
 
-const getPopularMovies = createAsyncThunk<IMoviesService, number>(
+const getTopRatedMovies = createAsyncThunk<IMoviesService, number>(
     'movieSlice/getPopularMovies',
     async (currentPage, {rejectWithValue}) => {
         try {
-            const {data} = await movieService.getPopularMovies();
+            const {data} = await movieService.getTopRatedMovies(currentPage);
             return data
         } catch (e) {
             const error = e as AxiosError;
@@ -101,7 +102,7 @@ const getPopularMovies = createAsyncThunk<IMoviesService, number>(
     }
 )
 
-const getTopRatedMovies = createAsyncThunk<IMoviesService, void>(
+const getNowPlayingMovies = createAsyncThunk<IMoviesService, void>(
     'movieSlice/getTopRatedMovies',
     async (_, {rejectWithValue}) => {
         try {
@@ -135,13 +136,13 @@ let slice = createSlice({
             .addCase(getMovieById.fulfilled, (state, action) => {
                 state.movieInfo = action.payload
             })
-            .addCase(getPopularMovies.fulfilled,(state, action)=>{
-                state.movies = action.payload.results
+            .addCase(getTopRatedMovies.fulfilled,(state, action)=>{
+                state.topRatedMovies = action.payload.results
                 state.total_pages = action.payload.total_pages <= 500 ? action.payload.total_pages : 500;
                 state.currentPage = action.payload.page
             })
-            .addCase(getTopRatedMovies.fulfilled,(state, action)=>{
-                state.movies = action.payload.results
+            .addCase(getNowPlayingMovies.fulfilled,(state, action)=>{
+                state.topRatedMovies = action.payload.results
                 // state.total_pages = action.payload.total_pages <= 500 ? action.payload.total_pages : 500;
                 // state.currentPage = action.payload.page
             })
@@ -161,8 +162,8 @@ const movieActions = {
     ...actions,
     getMovies,
     getMovieById,
-    getPopularMovies,
-    getTopRatedMovies
+    getTopRatedMovies,
+    getNowPlayingMovies
 }
 
 export {

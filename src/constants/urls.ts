@@ -8,10 +8,11 @@ const tokenAccess = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZWI3ZjQ1MGNmNDljNTZkZTc4ZD
 const urls = {
     movie:'./movie',
     discover_movie:'/discover/movie',
-    search_movie:'/search/movie',
+    genre: 'genre/movie/list',
     movie_popular:'/movie/popular',
     movie_top_rated:'/movie/top_rated',
-    genre: 'genre/movie/list',
+    search_movie:'/search/movie',
+    movie_now_playing:'/movie/now_playing',
     account:'/account',
 }
 
