@@ -82,7 +82,7 @@ export interface IMovieInitialState {
     total_results: number,
     total_pages: number,
     currentPage: number,
-    // currentPage2: number,
+    currentQuery:string,
     loading:boolean,
     movieInfo: IMovieDetails
 }

@@ -6,7 +6,11 @@ import {useAppDispatch, useAppSelector} from "../../hooks";
 import {movieActions} from "../../redux";
 import css from './PaginationMovies.module.css'
 
-const PaginationMovies: FC = () => {
+
+interface IProps {
+    query:string|null
+}
+const PaginationMovies: FC<IProps> = ({query}) => {
 
     const {currentPage, total_pages} = useAppSelector(state => state.movies);
 
@@ -22,8 +26,9 @@ const PaginationMovies: FC = () => {
                 size="large"
                 variant="outlined" color="primary"
                 onChange={(_, page: number) => {
-                    dispatch(movieActions.changePage(page))
-                    navigate(`?page=${page}`);
+                    dispatch(movieActions.changePage(page));
+                    query &&  navigate(`?query=${query}&?page=${page}`);
+                    !query && navigate(`?page=${page}`);
                 }}/>
         </div>
     );

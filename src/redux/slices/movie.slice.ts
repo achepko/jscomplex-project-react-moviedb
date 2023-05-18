@@ -33,15 +33,15 @@ const initialMovieDetails = {
 }
 
 const initialState: IMovieInitialState = {
-    topRatedMovies: [],
-    nowPlayingMovies: [],
     movies: [],
     currentPage: 1,
-    // currentPage2: 1,
+    currentQuery:'',
     total_results: 0,
     total_pages: 500,
+    movieInfo: initialMovieDetails,
+    topRatedMovies: [],
     loading: false,
-    movieInfo: initialMovieDetails
+    nowPlayingMovies: []
 }
 
 
@@ -115,12 +115,28 @@ const getNowPlayingMovies = createAsyncThunk<IMoviesService, void>(
     }
 )
 
+const searchMovies = createAsyncThunk<IMoviesService, [query:string,currentPage:number]>(
+    'movieSlice/searchMovies',
+    async ([query,currentPage], {rejectWithValue}) => {
+        try {
+            const {data} = await movieService.searchMovies(query,currentPage);
+            return data
+        } catch (e) {
+            const error = e as AxiosError;
+            return rejectWithValue(error.message)
+        }
+    }
+)
+
 let slice = createSlice({
     name: 'movieSlice',
     initialState,
     reducers: {
         changePage:(state, action)=>{
             state.currentPage = action.payload
+        },
+        setCurrentQuery:(state, action)=>{
+            state.currentQuery = action.payload
         },
         resetPage:(state)=>{
             state.currentPage=1
@@ -138,6 +154,11 @@ let slice = createSlice({
             })
             .addCase(getTopRatedMovies.fulfilled,(state, action)=>{
                 state.topRatedMovies = action.payload.results
+                state.total_pages = action.payload.total_pages <= 500 ? action.payload.total_pages : 500;
+                state.currentPage = action.payload.page
+            })
+            .addCase(searchMovies.fulfilled,(state, action)=>{
+                state.movies = action.payload.results
                 state.total_pages = action.payload.total_pages <= 500 ? action.payload.total_pages : 500;
                 state.currentPage = action.payload.page
             })
@@ -163,6 +184,7 @@ const movieActions = {
     getMovies,
     getMovieById,
     getTopRatedMovies,
+    searchMovies,
     getNowPlayingMovies
 }
 

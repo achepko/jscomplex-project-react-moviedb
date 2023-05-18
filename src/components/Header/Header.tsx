@@ -5,6 +5,8 @@ import css from './Header.module.css'
 import {useAppDispatch} from "../../hooks";
 import {movieActions} from "../../redux";
 import {ThemeSwitcher} from "../ThemeSwitcher/ThemeSwitcher";
+import {SearchMovie} from "../SearchMovie/SearchMovie";
+
 
 const Header: FC = () => {
 
@@ -23,7 +25,7 @@ const Header: FC = () => {
             <div>LOGO</div>
             <button onClick={()=>navigate('/')}>Main page</button>
             <button onClick={handleMovieListClick}>MovieList</button>
-            <div>SEARCH</div>
+            <div><SearchMovie/></div>
             <div>LOG IN</div>
         </div>
     );
