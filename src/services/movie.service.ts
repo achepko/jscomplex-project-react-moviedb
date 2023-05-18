@@ -15,7 +15,7 @@ const movieService = {
     getNowPlayingMovies:(page: number = 1):IAxiosRes<IMoviesService>=>
         axiosService.get(urls.movie_now_playing+`?page=${page}`),
     searchMovies:(query:string='',page: number = 1):IAxiosRes<IMoviesService>=>
-        axiosService.get(urls.search_movie+`?query=${query}&?page=${page}`)
+        axiosService.get(urls.search_movie+`?query=${query}&page=${page}`)
 }
 
 

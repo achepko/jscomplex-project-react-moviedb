@@ -15,6 +15,7 @@ const Header: FC = () => {
 
     const handleMovieListClick = () => {
         dispatch(movieActions.resetPage());
+        dispatch(movieActions.setCurrentQuery(''))
         navigate("/discover/movie?page=1");
     };
 

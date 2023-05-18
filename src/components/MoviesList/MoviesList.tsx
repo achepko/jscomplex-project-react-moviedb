@@ -65,17 +65,16 @@ const MoviesList: FC = () => {
     const searchURLParams = new URLSearchParams(location.search);
     const pageFromURL = searchURLParams.get('page');
     const queryFromURL = searchURLParams.get('query');
+    const query = currentQuery || queryFromURL;
     const page = pageFromURL ? +pageFromURL : currentPage;
 
     useEffect(() => {
-        if (!queryFromURL && !currentQuery) {
+        if (!query) {
             dispatch(movieActions.getMovies(page));
-        } else if (queryFromURL && !currentQuery) {
-            dispatch(movieActions.searchMovies([queryFromURL, page]));
         }else {
-            dispatch(movieActions.searchMovies([currentQuery, page]));
+            dispatch(movieActions.searchMovies([query, page]));
         }
-    }, [dispatch, page, queryFromURL,currentQuery]);
+    }, [dispatch, page,query]);
 
     return (
         <div>
@@ -85,7 +84,7 @@ const MoviesList: FC = () => {
             <hr/>
             <div className={css.MovieList}>{movies.map(movie => <MovieListCard key={movie.id} movie={movie}/>)}</div>
             <hr/>
-            <PaginationMovies query={queryFromURL}/>
+            <PaginationMovies query={query}/>
             <Footer/>
         </div>
     );

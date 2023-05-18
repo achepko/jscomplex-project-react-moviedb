@@ -27,7 +27,8 @@ const PaginationMovies: FC<IProps> = ({query}) => {
                 variant="outlined" color="primary"
                 onChange={(_, page: number) => {
                     dispatch(movieActions.changePage(page));
-                    query &&  navigate(`?query=${query}&?page=${page}`);
+                    query &&  navigate(`/search/movie?query=${query}&page=${page}`);
+                    console.log(page)
                     !query && navigate(`?page=${page}`);
                 }}/>
         </div>

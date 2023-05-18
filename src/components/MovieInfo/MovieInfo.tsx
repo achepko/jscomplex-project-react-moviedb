@@ -31,6 +31,7 @@ const MovieInfo: FC = () => {
                 <Header/>
                 {movieInfo &&  (
                     <div>
+                        {/*<PosterPreview src={poster_path} alt={title} genre_ids={genre_ids} adult={adult}/>*/}
                         {movieInfo.title && <h2>{movieInfo.title}</h2>}
                         {movieInfo.overview && <p>{movieInfo.overview}</p>}
                         {movieInfo.release_date && <p>{movieInfo.release_date}</p>}

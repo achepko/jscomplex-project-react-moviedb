@@ -12,8 +12,7 @@ const MainPage: FC = () => {
         <div>
             <Header/>
             <MovieNowPlaying/>
-            <GenreList/>
-            <p> hided - filtes by genre/date/rate</p>
+            <hr/>
             <MovieTopRated/>
             <Footer/>
         </div>
