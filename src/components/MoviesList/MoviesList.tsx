@@ -41,7 +41,6 @@ const MoviesList: FC = () => {
             <Header/>
             <hr/>
             <SearchMovieAdvanced/>
-            <p> hided - filtered by genre/date/rate</p>
             <hr/>
             <div className={css.MovieList}>{movies.map(movie => <MovieListCard key={movie.id} movie={movie}/>)}</div>
             <hr/>

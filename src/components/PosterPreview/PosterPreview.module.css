@@ -3,7 +3,7 @@
     width: 250px;
     position: relative;
 }
-.PosterPreview img {
+.poster img {
     height: 350px;
     width: 250px;
     border-radius: 10px;
@@ -13,4 +13,13 @@
     position: absolute;
     top: 0;
     left: 0;
+}
+.adult{
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+}
+.adult img {
+
+    border-radius: 50%;
 }

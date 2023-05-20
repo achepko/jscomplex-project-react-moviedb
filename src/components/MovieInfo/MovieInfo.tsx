@@ -27,6 +27,7 @@ const MovieInfo: FC = () => {
     useEffect(() => {
         if (id) {
             dispatch(movieActions.getMovieById(id))
+            dispatch(movieActions.resetKey)
         }
     }, [dispatch, id])
 

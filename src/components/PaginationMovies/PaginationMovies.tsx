@@ -28,7 +28,7 @@ const PaginationMovies: FC<IProps> = ({query,sort_by,with_genres}) => {
                 count={total_pages}
                 page={currentPage}
                 size="large"
-                variant="outlined" color="primary"
+                color="primary"
                 onChange={(_, page: number) => {
                     dispatch(movieActions.changePage(page));
                     query && navigate(`/search/movie?query=${query}&page=${page}`);

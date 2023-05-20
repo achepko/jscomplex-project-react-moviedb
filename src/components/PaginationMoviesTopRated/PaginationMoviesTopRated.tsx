@@ -16,12 +16,10 @@ const PaginationMoviesTopRated: FC = () => {
             <Pagination
                 count={total_pages}
                 page={currentPage}
-                shape="rounded"
                 size="large"
-                variant="outlined" color="primary"
+                color="primary"
                 onChange={(_, page: number) => {
                     dispatch(movieActions.changePage(page))
-                    // navigate(`?page=${page}`);
                 }}/>
         </div>
     );

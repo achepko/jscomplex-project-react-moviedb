@@ -16,13 +16,10 @@ const MovieInfoTrailer: FC<IProps> = ({id}) => {
     const keyTrailer = key
 
     useEffect(() => {
-        console.log(id, 'получили уже в трейлер')
         if (id) {
             dispatch(movieActions.getVideoById(+id))
-            console.log(keyTrailer)
         }
     }, [id,keyTrailer])
-
 
     return (
         <div className={css.MovieInfoTrailer}>

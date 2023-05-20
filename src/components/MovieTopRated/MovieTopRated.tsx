@@ -9,21 +9,19 @@ import {PaginationMoviesTopRated} from "../PaginationMoviesTopRated/PaginationMo
 const MovieTopRated: FC = () => {
 
 
-    let {topRatedMovies,currentPage} = useAppSelector(state => state.movies);
+    let {topRatedMovies, currentPage} = useAppSelector(state => state.movies);
     let dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(movieActions.getTopRatedMovies(currentPage));
-    }, [dispatch,currentPage])
+    }, [dispatch, currentPage])
 
     return (
-        <div>
-
+        <div className={css.MovieTopRated_container}>
+            <div className={css.MovieTopRated_top}><h1>TOP RATED MOVIES</h1></div>
             <div className={css.MovieTopRated}>
-                <h4>TOP RATED</h4>
                 {topRatedMovies.map(movie => <MovieListCard key={movie.id} movie={movie}/>)}
             </div>
-            <hr/>
             <PaginationMoviesTopRated/>
         </div>
     );

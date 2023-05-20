@@ -17,9 +17,10 @@ const PosterPreview: FC<IMoviePosterProps> = ({src,alt,genre_ids,adult}) => {
 
     return (
         <div className={css.PosterPreview}>
-            <img src={src ? `${posterURL}/${src}` : noPoster}
-                 alt={`${alt}`}/>
+            <div className={css.poster}><img src={src ? `${posterURL}/${src}` : noPoster}
+                    alt={`${alt}`}/></div>
             <div className={css.badges}><GenreBadge genre_ids={genre_ids}/></div>
+            <div className={css.adult}>{adult && <img src="/18+.png" alt="Only 18+" width="30" height="30"/>} </div>
         </div>
     );
 };

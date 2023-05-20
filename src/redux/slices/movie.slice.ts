@@ -152,6 +152,9 @@ let slice = createSlice({
         },
         resetPage: (state) => {
             state.currentPage = 1
+        },
+        resetKey:(state)=>{
+            state.key = ''
         }
     },
     extraReducers: builder =>

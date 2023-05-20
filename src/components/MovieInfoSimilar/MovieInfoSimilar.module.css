@@ -3,15 +3,5 @@
     height: 400px;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-items: center;
-    justify-content: center;
-    row-gap: 10px;
-    column-gap: 10px;
-}
-
-.poster_info{
-    display: flex;
-    flex-direction: row;
-    column-gap: 50px;
+    justify-content: space-evenly;
 }
