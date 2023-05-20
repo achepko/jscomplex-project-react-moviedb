@@ -11,9 +11,13 @@ interface IMoviePosterProps {
 }
 
 const PosterPreview: FC<IMoviePosterProps> = ({src,alt,genre_ids,adult}) => {
+
+    const noPoster = 'https://ranobehub.org/img/default.jpg';
+
     return (
         <div className={css.MoviePoster}>
-            <img src={`${posterURL}/${src}`} alt={`${alt}`}/>
+            <img src={src ? `${posterURL}/${src}` : noPoster}
+                 alt={`${alt}`}/>
         </div>
     );
 };

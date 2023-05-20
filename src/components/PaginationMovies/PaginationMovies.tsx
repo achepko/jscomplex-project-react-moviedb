@@ -22,7 +22,6 @@ const PaginationMovies: FC<IProps> = ({query}) => {
             <Pagination
                 count={total_pages}
                 page={currentPage}
-                shape="rounded"
                 size="large"
                 variant="outlined" color="primary"
                 onChange={(_, page: number) => {

@@ -20,7 +20,7 @@ const StarsRating: FC<IProps> = ({vote_average,vote_count}) => {
                 defaultValue={movieRating}
                 precision={0.5}
                 max={5}
-            /> {vote_average}{vote_count}</div>
+            /> {movieRating} / {vote_count}</div>
         </div>
     );
 };

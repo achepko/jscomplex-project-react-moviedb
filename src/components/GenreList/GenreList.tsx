@@ -6,21 +6,23 @@ import {Genre} from "../Genre/Genre";
 import css from './GenreList.module.css'
 
 
+const GenreList:FC = () => {
 
-const GenreList: FC = () => {
-
-    const dispatch = useAppDispatch();
+    const  dispatch = useAppDispatch();
     const {genres} = useAppSelector(state => state.genres);
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(genreActions.getGenres())
-    },[dispatch])
+    }, [dispatch])
 
     return (
-        <div className={css.GenreList}>
-            {genres.map(genre=> <Genre key={genre.id} genre={genre} /> )}
-        </div>
-    );
-};
+    < div className = {css.GenreList} >
+        {genres.map(genre => <Genre key = {genre.id}genre = {genre}
+    />)}
+</div>
+)
+    ;
+}
+    ;
 
-export {GenreList};
+    export {GenreList};

@@ -1,21 +1,23 @@
 import {createAsyncThunk, createSlice, isFulfilled} from "@reduxjs/toolkit";
-import {IGenreInitialState, IGenresService} from "../../interfaces";
-import {genreService} from "../../services/genre.service";
 import {AxiosError} from "axios";
 
+import {IGenreInitialState, IGenresService} from "../../interfaces";
+import {genreService} from "../../services";
 
-const initialState:IGenreInitialState = {
-    genres:[]
+
+const initialState: IGenreInitialState = {
+    genres: [],
+    selectedGenres: []
 }
 
 
-const getGenres = createAsyncThunk<IGenresService,void>(
+const getGenres = createAsyncThunk<IGenresService, void>(
     'genreSlice/getGenres',
-    async (_,{rejectWithValue})=>{
+    async (_, {rejectWithValue}) => {
         try {
             const {data} = await genreService.getAll();
             return data
-        }catch (e) {
+        } catch (e) {
             const error = e as AxiosError;
             return rejectWithValue(error.message)
         }
@@ -23,19 +25,29 @@ const getGenres = createAsyncThunk<IGenresService,void>(
 )
 
 const slice = createSlice({
-    name:'genreSlice',
+    name: 'genreSlice',
     initialState,
-    reducers:{},
-    extraReducers:builder =>
+    reducers: {
+        selectGenre: (state, action) => {
+            const genre = action.payload;
+            state.selectedGenres.push(genre);
+        },
+        deselectGenre: (state, action) => {
+            const genre = action.payload;
+            state.selectedGenres = state.selectedGenres.filter(selectedGenre => selectedGenre !== genre);
+        }
+    },
+    extraReducers: builder =>
         builder
-            .addCase(getGenres.fulfilled,(state, action)=>{
+            .addCase(getGenres.fulfilled, (state, action) => {
                 state.genres = action.payload.genres
             })
+
 
 });
 
 
-const {actions,reducer:genreReducer} = slice;
+const {actions, reducer: genreReducer} = slice;
 
 
 const genreActions = {
