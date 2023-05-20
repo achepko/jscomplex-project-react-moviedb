@@ -23,12 +23,12 @@ export interface IGenres {
     name: string,
 }
 
-export interface IProduction_company {
+export interface IProduction_country {
     iso_3166_1: string,
     name: string,
 }
 
-export interface IProduction_country {
+export interface IProduction_company {
     id: number,
     logo_path: string,
     name: string,
@@ -77,6 +77,8 @@ export interface IMoviesService {
 
 export interface IMovieInitialState {
     movies: IMovie[],
+    similarMovies:IMovie[],
+    key:string
     topRatedMovies: IMovie[],
     nowPlayingMovies: IMovie[],
     total_results: number,

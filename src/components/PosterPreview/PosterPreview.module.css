@@ -1,4 +1,16 @@
-.MoviePoster img{
+.PosterPreview  {
     height: 350px;
     width: 250px;
+    position: relative;
+}
+.PosterPreview img {
+    height: 350px;
+    width: 250px;
+    border-radius: 10px;
+}
+.badges {
+    padding: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
 }

@@ -8,9 +8,14 @@ import css from './PaginationMovies.module.css'
 
 
 interface IProps {
-    query:string|null
+    query: string | null
+    sort_by:'popularity.asc'|'popularity.desc'|
+        'vote_average.asc' | 'vote_average.desc' |
+        'primary_release_date.asc' | 'primary_release_date.desc',
+    with_genres: string
 }
-const PaginationMovies: FC<IProps> = ({query}) => {
+
+const PaginationMovies: FC<IProps> = ({query,sort_by,with_genres}) => {
 
     const {currentPage, total_pages} = useAppSelector(state => state.movies);
 
@@ -26,8 +31,7 @@ const PaginationMovies: FC<IProps> = ({query}) => {
                 variant="outlined" color="primary"
                 onChange={(_, page: number) => {
                     dispatch(movieActions.changePage(page));
-                    query &&  navigate(`/search/movie?query=${query}&page=${page}`);
-                    console.log(page)
+                    query && navigate(`/search/movie?query=${query}&page=${page}`);
                     !query && navigate(`?page=${page}`);
                 }}/>
         </div>

@@ -14,10 +14,10 @@ const GenreBadge: FC<IProps> = ({genre_ids}) => {
     const MovieGenreBadge = () => {
         const genresArray = genres ? genres : [];
         return (
-            <div className={css.GenreBadge}>
+            <div className={css.badge}>
                 {genresArray.map((genre) => {
                     if (genre_ids.includes(genre.id)) {
-                        return  (<Badge
+                        return  (<Badge className={css.genre}
                             key={genre.id}
                             color="primary"
                             overlap="circular">

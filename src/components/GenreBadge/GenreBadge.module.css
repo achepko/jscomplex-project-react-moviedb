@@ -1,5 +1,22 @@
-.GenreBadge{
-    background: greenyellow;
+.badge{
+    /*background: greenyellow;*/
     display: flex;
-
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.genre{
+    background: grey;
+    font-size: 11px;
+    height: 12px;
+    min-width: 55px;
+    max-width: 100px;
+    color: white;
+    border-radius: 10px;
+    border: solid 1px white;
+    padding: 2px;
+    margin-right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

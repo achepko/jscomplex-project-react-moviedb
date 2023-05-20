@@ -3,6 +3,7 @@ import {AxiosError} from "axios";
 
 import {IMovieDetails, IMovieInitialState, IMoviesService} from "../../interfaces";
 import {movieService} from "../../services";
+import {IVideosService} from "../../interfaces/video.interface";
 
 const initialMovieDetails = {
     adult: false,
@@ -34,39 +35,24 @@ const initialMovieDetails = {
 
 const initialState: IMovieInitialState = {
     movies: [],
+    similarMovies: [],
     currentPage: 1,
-    currentQuery:'',
+    currentQuery: '',
     total_results: 0,
     total_pages: 500,
     movieInfo: initialMovieDetails,
+    key:'',
     topRatedMovies: [],
     loading: false,
     nowPlayingMovies: []
 }
 
-
-// const getMovies = createAsyncThunk<IMoviesService, {
-//     currentPage: number,
-//     selectedGenres: string,
-//     sortedBy: string
-// }>(
-//     'movieSlice/getMovies',
-//     async ({currentPage,selectedGenres,sortedBy},{rejectWithValue})=>{
-//         try {
-//             let {data} = await movieService.getMovies(currentPage,selectedGenres,sortedBy);
-//             return data
-//         }catch (e) {
-//             const error = e as AxiosError;
-//             return rejectWithValue(error.message)
-//         }
-//     }
-// )
-
-const getMovies = createAsyncThunk<IMoviesService,number>(
-    'movieSlice/getMovies',
-    async (currentPage, {rejectWithValue}) => {
+const getMovies = createAsyncThunk<IMoviesService,
+    { page: number, sort_by: string, with_genres: string }>
+('movieSlice/getMovies',
+    async ({page, sort_by, with_genres}, {rejectWithValue}) => {
         try {
-            let {data} = await movieService.getAll(currentPage);
+            let {data} = await movieService.getAll(page, sort_by, with_genres);
             return data
         } catch (e) {
             const error = e as AxiosError;
@@ -75,11 +61,37 @@ const getMovies = createAsyncThunk<IMoviesService,number>(
     }
 )
 
-const getMovieById = createAsyncThunk<IMovieDetails,string>(
+const getMovieById = createAsyncThunk<IMovieDetails, string>(
     'movieSlice/getMovieById',
     async (id, {rejectWithValue}) => {
         try {
             let {data} = await movieService.getMovieById(id);
+            return data
+
+        } catch (e) {
+            const error = e as AxiosError;
+            return rejectWithValue(error.message)
+        }
+    }
+)
+
+const getVideoById = createAsyncThunk<IVideosService, number>(
+    'movieSlice/getVideo',
+    async (id,{rejectWithValue})=>{
+        try {
+            const {data} = await movieService.getVideoById(id);
+            return data;
+        } catch (e) {
+            const err = e as AxiosError
+            return rejectWithValue(err.response?.data)
+        }
+    });
+
+const getSimilarMoviesById = createAsyncThunk<IMoviesService, number>(
+    'movieSlice/getSimilarMoviesById',
+    async (id, {rejectWithValue}) => {
+        try {
+            let {data} = await movieService.getSimilarMoviesById(id);
             return data
 
         } catch (e) {
@@ -115,11 +127,11 @@ const getNowPlayingMovies = createAsyncThunk<IMoviesService, void>(
     }
 )
 
-const searchMovies = createAsyncThunk<IMoviesService, [query:string,currentPage:number]>(
+const searchMovies = createAsyncThunk<IMoviesService, [query: string, currentPage: number]>(
     'movieSlice/searchMovies',
-    async ([query,currentPage], {rejectWithValue}) => {
+    async ([query, currentPage], {rejectWithValue}) => {
         try {
-            const {data} = await movieService.searchMovies(query,currentPage);
+            const {data} = await movieService.searchMovies(query, currentPage);
             return data
         } catch (e) {
             const error = e as AxiosError;
@@ -132,14 +144,14 @@ let slice = createSlice({
     name: 'movieSlice',
     initialState,
     reducers: {
-        changePage:(state, action)=>{
+        changePage: (state, action) => {
             state.currentPage = action.payload
         },
-        setCurrentQuery:(state, action)=>{
+        setCurrentQuery: (state, action) => {
             state.currentQuery = action.payload
         },
-        resetPage:(state)=>{
-            state.currentPage=1
+        resetPage: (state) => {
+            state.currentPage = 1
         }
     },
     extraReducers: builder =>
@@ -152,25 +164,30 @@ let slice = createSlice({
             .addCase(getMovieById.fulfilled, (state, action) => {
                 state.movieInfo = action.payload
             })
-            .addCase(getTopRatedMovies.fulfilled,(state, action)=>{
+            .addCase(getVideoById.fulfilled,(state, action)=>{
+                const videoTrailer = action.payload.results.find((item) => item.type === 'Trailer');
+                state.key = videoTrailer!.key
+            })
+            .addCase(getSimilarMoviesById.fulfilled,(state, action)=>{
+                state.similarMovies = action.payload.results
+            })
+            .addCase(getTopRatedMovies.fulfilled, (state, action) => {
                 state.topRatedMovies = action.payload.results
                 state.total_pages = action.payload.total_pages <= 500 ? action.payload.total_pages : 500;
                 state.currentPage = action.payload.page
             })
-            .addCase(searchMovies.fulfilled,(state, action)=>{
+            .addCase(searchMovies.fulfilled, (state, action) => {
                 state.movies = action.payload.results
                 state.total_pages = action.payload.total_pages <= 500 ? action.payload.total_pages : 500;
                 state.currentPage = action.payload.page
             })
-            .addCase(getNowPlayingMovies.fulfilled,(state, action)=>{
+            .addCase(getNowPlayingMovies.fulfilled, (state, action) => {
                 state.topRatedMovies = action.payload.results
-                // state.total_pages = action.payload.total_pages <= 500 ? action.payload.total_pages : 500;
-                // state.currentPage = action.payload.page
             })
             .addMatcher(isFulfilled(), state => {
                 state.loading = false
             })
-            .addMatcher(isPending(),state => {
+            .addMatcher(isPending(), state => {
                 state.loading = true
             })
 
@@ -183,9 +200,11 @@ const movieActions = {
     ...actions,
     getMovies,
     getMovieById,
+    getVideoById,
     getTopRatedMovies,
     searchMovies,
-    getNowPlayingMovies
+    getNowPlayingMovies,
+    getSimilarMoviesById
 }
 
 export {

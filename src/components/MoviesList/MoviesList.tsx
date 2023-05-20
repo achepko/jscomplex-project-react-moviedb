@@ -3,17 +3,17 @@ import {useLocation} from "react-router-dom";
 
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import css from './MoviesList.module.css'
-import {movieActions} from "../../redux";
+import {movieActions, searchActions} from "../../redux";
 import {MovieListCard} from "../MovieListCard/MovieListCard";
 import {Header} from "../Header/Header";
 import {Footer} from "../Footer/Footer";
 import {PaginationMovies} from "../PaginationMovies/PaginationMovies";
-import {GenreList} from "../GenreList/GenreList";
-import {SearchMovie} from "../SearchMovie/SearchMovie";
 import {SearchMovieAdvanced} from "../SearchMovieAdvanced/SearchMovieAdvanced";
 
 const MoviesList: FC = () => {
     const { movies, currentPage, currentQuery } = useAppSelector(state => state.movies);
+    const {with_genres,sort_by} = useAppSelector(state => state.search);
+
     const dispatch = useAppDispatch();
     const location = useLocation();
 
@@ -25,11 +25,16 @@ const MoviesList: FC = () => {
 
     useEffect(() => {
         if (!query) {
-            dispatch(movieActions.getMovies(page));
+            dispatch(movieActions.getMovies({page,sort_by,with_genres}));
         }else {
             dispatch(movieActions.searchMovies([query, page]));
+
         }
-    }, [dispatch, page,query]);
+        return () => {
+            dispatch(movieActions.resetPage())
+            dispatch(searchActions.resetFilter())
+        }
+    }, [dispatch, page,query,sort_by,with_genres]);
 
     return (
         <div>
@@ -40,7 +45,7 @@ const MoviesList: FC = () => {
             <hr/>
             <div className={css.MovieList}>{movies.map(movie => <MovieListCard key={movie.id} movie={movie}/>)}</div>
             <hr/>
-            <PaginationMovies query={query}/>
+            <PaginationMovies query={query} sort_by={sort_by} with_genres={with_genres}/>
             <Footer/>
         </div>
     );

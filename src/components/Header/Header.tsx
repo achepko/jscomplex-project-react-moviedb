@@ -21,15 +21,17 @@ const Header: FC = () => {
 
     return (
         <div className={css.Header}>
-            <h3>HEADER</h3>
+            <div> <img src='/logo okten.jfif' alt="oktenLogo" width="80" height="80" style={{ borderRadius: '50%' }}/></div>
             <ThemeSwitcher/>
-            <div>LOGO</div>
             <button onClick={()=>navigate('/')}>Main page</button>
             <button onClick={handleMovieListClick}>MovieList</button>
             <div><SearchMovie/></div>
-            <div>LOG IN</div>
+            <div>
+                <img src='/profile.avif' alt="userProfile" width="60" height="60" style={{ borderRadius: '50%' }}/>
+                <br/>
+                <span>UserProfile</span>
+            </div>
         </div>
     );
 };
-
 export {Header};

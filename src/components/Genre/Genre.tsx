@@ -14,7 +14,7 @@ const Genre: FC<IProps> = ({genre}) => {
     
     return (
         <div>
-            <Link to={'/'}>{name}</Link>
+            <div>{name}</div>
         </div>
     );
 };

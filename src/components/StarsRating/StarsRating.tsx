@@ -7,17 +7,17 @@ interface IProps {
     vote_count: number
 }
 
-const StarsRating: FC<IProps> = ({vote_average,vote_count}) => {
+const StarsRating: FC<IProps> = ({vote_average, vote_count}) => {
 
     const movieRating = vote_average ? Math.round(vote_average) / 2 : 0
 
     return (
         <div>
-            <div className={`${css.rating}`}><Rating
+            <div className={css.rating}><Rating
                 name='movie_rating'
                 readOnly
                 size='small'
-                defaultValue={movieRating}
+                value={movieRating}
                 precision={0.5}
                 max={5}
             /> {movieRating} / {vote_count}</div>
