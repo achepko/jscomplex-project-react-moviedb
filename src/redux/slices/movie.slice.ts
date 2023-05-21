@@ -44,7 +44,8 @@ const initialState: IMovieInitialState = {
     key:'',
     topRatedMovies: [],
     loading: false,
-    nowPlayingMovies: []
+    nowPlayingMovies: [],
+    ifGenreSelected:''
 }
 
 const getMovies = createAsyncThunk<IMoviesService,
@@ -101,11 +102,11 @@ const getSimilarMoviesById = createAsyncThunk<IMoviesService, number>(
     }
 )
 
-const getMoviesByGenreId = createAsyncThunk<IMoviesService, number>(
+const getMoviesByGenreId = createAsyncThunk<IMoviesService, { id:number,page:number }>(
     'movieSlice/getMoviesByGenreId',
-    async (id, {rejectWithValue}) => {
+    async ({id,page}, {rejectWithValue}) => {
         try {
-            let {data} = await movieService.getMoviesByGenreId(id);
+            let {data} = await movieService.getMoviesByGenreId(id,page);
             return data
 
         } catch (e) {
@@ -169,6 +170,12 @@ let slice = createSlice({
         },
         resetKey:(state)=>{
             state.key = ''
+        },
+        setGenre:(state,action)=>{
+            state.ifGenreSelected = action.payload
+        },
+        resetGenre:(state)=>{
+            state.ifGenreSelected = ''
         }
     },
     extraReducers: builder =>
@@ -190,6 +197,8 @@ let slice = createSlice({
             })
             .addCase(getMoviesByGenreId.fulfilled,(state, action)=>{
                 state.movies = action.payload.results
+                state.total_pages = action.payload.total_pages <= 500 ? action.payload.total_pages : 500;
+                state.currentPage = action.payload.page
             })
             .addCase(getTopRatedMovies.fulfilled, (state, action) => {
                 state.topRatedMovies = action.payload.results

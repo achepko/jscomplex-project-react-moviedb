@@ -1,16 +1,14 @@
 import {FC, useEffect, useState} from "react";
-import { Button, Menu, MenuItem } from "@mui/material";
+import {Button, Menu, MenuItem} from "@mui/material";
 
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import {useAppDispatch, useAppSelector} from "../../hooks";
 import {genreActions, movieActions} from "../../redux";
-import { Genre } from "../Genre";
+import {Genre} from "../Genre";
 import css from "./GenreList.module.css";
 
 const GenreList: FC = () => {
     const dispatch = useAppDispatch();
-    const { genres } = useAppSelector((state) => state.genres);
-    const { movies } = useAppSelector((state) => state.movies);
-
+    const {genres} = useAppSelector((state) => state.genres);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
@@ -21,11 +19,10 @@ const GenreList: FC = () => {
     };
 
     const handleGenreOnClick = (genreId: number) => {
-        dispatch(movieActions.getMoviesByGenreId(genreId))
+        dispatch(movieActions.setGenre(genreId))
         setAnchorEl(null);
-        console.log(genreId);
-        console.log(movies);
     };
+
 
     useEffect(() => {
         dispatch(genreActions.getGenres());
@@ -49,7 +46,7 @@ const GenreList: FC = () => {
             >
                 {genres.map((genre) => (
                     <MenuItem key={genre.id} onClick={() => handleGenreOnClick(genre.id)}>
-                        <Genre genre={genre} />
+                        <Genre genre={genre}/>
                     </MenuItem>
                 ))}
             </Menu>
@@ -57,4 +54,4 @@ const GenreList: FC = () => {
     );
 };
 
-export { GenreList };
+export {GenreList};

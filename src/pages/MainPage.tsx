@@ -10,8 +10,7 @@ const MainPage: FC = () => {
     return (
         <div>
             <Header/>
-            <MovieNowPlaying/>
-            <hr/>
+            {/*<MovieNowPlaying/>*/}
             <MovieTopRated/>
             <Footer/>
         </div>

@@ -30,7 +30,6 @@ const SearchMovieAdvanced: FC = () => {
     }, [query, setValue]);
 
     const onSubmit: SubmitHandler<SearchFormData> = (data: SearchFormData) => {
-        console.log(data);
         const { query,sort_by,with_genres } = data;
 
         const page = 1;

@@ -21,8 +21,8 @@ const movieService = {
         axiosService.get(urls.movie + `/${id}/videos`),
     getSimilarMoviesById:(id:number):IAxiosRes<IMoviesService>=>
         axiosService.get(urls.movie+ `/${id}/similar`),
-    getMoviesByGenreId:(genreId:number):IAxiosRes<IMoviesService>=>
-        axiosService.get(urls.genreById + `/${genreId}/movies`)
+    getMoviesByGenreId:(genreId:number,page: number = 1):IAxiosRes<IMoviesService>=>
+        axiosService.get(urls.genreById + `/${genreId}/movies`+`?page=${page}`)
 }
 
 

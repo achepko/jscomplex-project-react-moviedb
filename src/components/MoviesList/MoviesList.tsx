@@ -14,7 +14,6 @@ const MoviesList: FC = () => {
     const { movies, currentPage, currentQuery } = useAppSelector(state => state.movies);
     const {with_genres,sort_by} = useAppSelector(state => state.search);
 
-    console.log(with_genres,'in movise');
     const dispatch = useAppDispatch();
     const location = useLocation();
 
@@ -31,17 +30,13 @@ const MoviesList: FC = () => {
             dispatch(movieActions.searchMovies([query, page]));
 
         }
-        return () => {
-            dispatch(movieActions.resetPage())
-            dispatch(searchActions.resetFilter())
-        }
     }, [dispatch, page,query,sort_by,with_genres]);
 
     return (
         <div>
             <Header/>
             <div className={css.MovieList_container}>
-                <SearchMovieAdvanced/>
+                <SearchMovieAdvanced />
                 <div className={css.MovieList}>
                     {movies.map(movie => <MovieListCard key={movie.id} movie={movie}/>)}
                 </div>

@@ -9,5 +9,5 @@ export interface IGenresService {
 
 export interface IGenreInitialState {
     genres:IGenre[],
-    selectedGenres:IGenre[]
+
 }

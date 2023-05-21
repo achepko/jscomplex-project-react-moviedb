@@ -17,14 +17,19 @@ const Header: FC = () => {
 
     const handleMovieListClick = () => {
         dispatch(movieActions.resetPage());
+        dispatch(movieActions.resetGenre())
         dispatch(movieActions.setCurrentQuery(''));
         navigate("/discover/movie?page=1");
     };
 
+    const handleMainPageClick = () => {
+        dispatch(movieActions.resetGenre())
+        navigate('/')
+    }
     return (
         <div className={css.Header}>
-            <button onClick={()=>navigate('/')} className={css.home_button}>
-                <img src='/logo okten.jfif' alt="oktenLogo" width="80" height="80" style={{ borderRadius: '50%' }}/>
+            <button onClick={handleMainPageClick} className={css.home_button}>
+                <img src='/logo okten.jfif' alt="oktenLogo" width="80" height="80" style={{borderRadius: '50%'}}/>
             </button>
             <ThemeSwitcher/>
             <Button
@@ -37,7 +42,7 @@ const Header: FC = () => {
             <GenreList/>
             <div><SearchMovie/></div>
             <div>
-                <img src='/profile.avif' alt="userProfile" width="60" height="60" style={{ borderRadius: '50%' }}/>
+                <img src='/profile.avif' alt="userProfile" width="60" height="60" style={{borderRadius: '50%'}}/>
             </div>
         </div>
     );

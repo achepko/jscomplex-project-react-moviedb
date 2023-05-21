@@ -86,5 +86,6 @@ export interface IMovieInitialState {
     currentPage: number,
     currentQuery:string,
     loading:boolean,
-    movieInfo: IMovieDetails
+    movieInfo: IMovieDetails,
+    ifGenreSelected:string
 }
