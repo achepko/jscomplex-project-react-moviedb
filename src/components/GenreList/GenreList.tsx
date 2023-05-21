@@ -5,9 +5,11 @@ import {useAppDispatch, useAppSelector} from "../../hooks";
 import {genreActions, movieActions} from "../../redux";
 import {Genre} from "../Genre";
 import css from "./GenreList.module.css";
+import {useNavigate} from "react-router-dom";
 
 const GenreList: FC = () => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const {genres} = useAppSelector((state) => state.genres);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -19,8 +21,10 @@ const GenreList: FC = () => {
     };
 
     const handleGenreOnClick = (genreId: number) => {
+        dispatch(movieActions.resetPage())
         dispatch(movieActions.setGenre(genreId))
         setAnchorEl(null);
+        navigate('/')
     };
 
 
