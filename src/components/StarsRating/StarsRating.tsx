@@ -1,6 +1,7 @@
 import {FC} from "react";
-import css from "../MovieListCard/MovieListCard.module.css";
 import {Rating} from "@mui/material";
+
+import css from "../MovieListCard/MovieListCard.module.css";
 
 interface IProps {
     vote_average: number

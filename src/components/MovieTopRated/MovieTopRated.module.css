@@ -1,5 +1,5 @@
 .MovieTopRated_container{
-    background: #717489;
+    background: linear-gradient(135deg, #717489 0%, #8c7daa 50%, #4e516e 100%);
     display: flex;
     flex-direction: column;
     align-items: center;

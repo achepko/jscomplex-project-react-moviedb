@@ -8,7 +8,7 @@ import {IVideosService} from "../interfaces/video.interface";
 
 const movieService = {
     getAll: (page: number = 1,sort_by:string,with_genres:string):IAxiosRes<IMoviesService>=>
-        axiosService.get(urls.discover_movie +`?page=${page}`+`&sort_by=${sort_by}`+`&with_wenres=${with_genres}`),
+        axiosService.get(urls.discover_movie +`?page=${page}`+`&sort_by=${sort_by}`+`&with_genres=${with_genres}`),
     getMovieById:(id:string):IAxiosRes<IMovieDetails>=>
         axiosService.get(urls.movie+`/${id}`),
     getTopRatedMovies:(page: number = 1):IAxiosRes<IMoviesService>=>
@@ -20,7 +20,9 @@ const movieService = {
     getVideoById:(id:number):IAxiosRes<IVideosService>=>
         axiosService.get(urls.movie + `/${id}/videos`),
     getSimilarMoviesById:(id:number):IAxiosRes<IMoviesService>=>
-        axiosService.get(urls.movie+ `/${id}/similar`)
+        axiosService.get(urls.movie+ `/${id}/similar`),
+    getMoviesByGenreId:(genreId:number):IAxiosRes<IMoviesService>=>
+        axiosService.get(urls.genreById + `/${genreId}/movies`)
 }
 
 

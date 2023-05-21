@@ -1,32 +1,29 @@
-import {FC, useEffect} from "react";
+import {FC, useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 
 import css from './MovieInfoTrailer.module.css'
-import {movieActions} from "../../redux";
-import {useAppDispatch, useAppSelector} from "../../hooks";
+import {movieService} from "../../services";
+import {IVideo} from "../../interfaces/video.interface";
 
-interface IProps {
-    id?: string;
-}
 
-const MovieInfoTrailer: FC<IProps> = ({id}) => {
+const MovieInfoTrailer: FC = () => {
 
-    const {key} = useAppSelector(state => state.movies)
-    const dispatch = useAppDispatch();
-
-    const keyTrailer = key
+    const [ketTrailer,setKeyTrailer] = useState<IVideo>();
+    const {id} = useParams<{ id: string }>();
 
     useEffect(() => {
         if (id) {
-            dispatch(movieActions.getVideoById(+id))
+            movieService.getVideoById(+id).then(value => value.data)
+                .then(value => setKeyTrailer(value.results.find((item) => item.type === 'Trailer')))
         }
-    }, [id,keyTrailer])
+    }, [id])
 
     return (
         <div className={css.MovieInfoTrailer}>
-            {id && <iframe
+            {ketTrailer?.key && <iframe
                 width="960"
                 height="540"
-                src={keyTrailer && `https://www.youtube.com/embed/${keyTrailer}`}
+                src={ketTrailer?.key && `https://www.youtube.com/embed/${ketTrailer?.key}`}
                 title="Movie Trailer"
                 frameBorder="0"
                 allowFullScreen
@@ -36,3 +33,4 @@ const MovieInfoTrailer: FC<IProps> = ({id}) => {
 };
 
 export {MovieInfoTrailer};
+

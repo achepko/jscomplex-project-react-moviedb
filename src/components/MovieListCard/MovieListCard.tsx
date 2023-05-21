@@ -2,9 +2,9 @@ import {FC} from "react";
 import {Link} from "react-router-dom";
 
 import {IMovie} from "../../interfaces";
-import {PosterPreview} from "../PosterPreview/PosterPreview";
+import {PosterPreview} from "../PosterPreview";
 import css from './MovieListCard.module.css'
-import {StarsRating} from "../StarsRating/StarsRating";
+import {StarsRating} from "../StarsRating";
 
 interface IProps {
     movie: IMovie
@@ -23,7 +23,7 @@ const MovieListCard: FC<IProps> = ({movie}) => {
             </Link>
             <StarsRating key={id} vote_average={vote_average} vote_count={vote_count} />
         </div>
-);
+    );
 };
 
 export {MovieListCard};

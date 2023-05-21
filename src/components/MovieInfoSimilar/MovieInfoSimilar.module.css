@@ -1,6 +1,5 @@
 .MovieInfoSimilar{
-    background: lightcoral;
-    height: 400px;
+    /*height: 400px;*/
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;

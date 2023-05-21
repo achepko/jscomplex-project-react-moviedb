@@ -1,8 +1,38 @@
 .Header{
-    background: cornflowerblue;
+    background: linear-gradient(135deg, #717489 0%, #8c7daa 50%, #4e516e 100%);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    justify-items: center;
+    align-items: center;
     height: 80px;
+    margin-bottom: 20px;
+    padding:10px;
+    border: black solid 1px;
+    border-radius: 20px;
+}
+
+.home_button{
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+}
+.home_button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.home_button:hover::after {
+    opacity: 1;
 }

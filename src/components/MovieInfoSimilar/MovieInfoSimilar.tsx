@@ -1,23 +1,22 @@
 import React, {FC, useEffect} from "react";
-import {Swiper, SwiperSlide} from "swiper/react";
-import {Autoplay, Navigation, Pagination} from "swiper";
+import {useParams} from "react-router-dom";
+
 
 import css from './MovieInfoSimilar.module.css'
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {movieActions} from "../../redux";
-import {MovieListCard} from "../MovieListCard/MovieListCard";
+import {MovieListCard} from "../MovieListCard";
 
-interface IProps {
-    id?: string
-}
-
-const MovieInfoSimilar: FC<IProps> = ({id}) => {
+const MovieInfoSimilar: FC = () => {
     const dispatch = useAppDispatch();
     const {similarMovies} = useAppSelector(state => state.movies);
+
+    const {id} = useParams<{ id: string }>();
 
     useEffect(() => {
      if (id){
          dispatch(movieActions.getSimilarMoviesById(+id));
+
      }
     }, [dispatch,id])
 
@@ -25,20 +24,9 @@ const MovieInfoSimilar: FC<IProps> = ({id}) => {
 
     return (
         <div className={css.MovieInfoSimilar}>
-            {similarShortMoviesList.map(movie => <MovieListCard key={movie.id} movie={movie}/>)}
-            {/*<Swiper*/}
-            {/*    slidesPerView={1}*/}
-            {/*    loop={true}*/}
-            {/*    pagination={{*/}
-            {/*        clickable: true,*/}
-            {/*    }}*/}
-            {/*    navigation={true}*/}
-            {/*    modules={[Pagination, Navigation, Autoplay]}>*/}
-            {/*    {*/}
-            {/*        similarShortMoviesList && similarShortMoviesList.map(movie =>*/}
-            {/*            <SwiperSlide key={movie.id}><MovieListCard key={movie.id} movie={movie}/></SwiperSlide>)*/}
-            {/*    }*/}
-            {/*</Swiper>*/}
+            {similarShortMoviesList && similarShortMoviesList && similarShortMoviesList.map(movie =>
+                <MovieListCard key={movie.id.toString()} movie={movie}/>
+            )}
         </div>
     );
 };

@@ -1,5 +1,49 @@
+
+.MovieInfo_container{
+    background: linear-gradient(135deg, #717489 0%, #8c7daa 50%, #4e516e 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding-top: 35px;
+    padding-bottom: 35px;
+    padding-left: 35px;
+    border: black solid 1px;
+    border-radius: 20px;
+}
+
 .poster_info{
     display: flex;
     flex-direction: row;
     column-gap: 50px;
+}
+.poster{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap:10px ;
+}
+.poster img{
+    border-radius: 20px;
+    border: solid white 2px;
+}
+.movie_info{
+    color: white;
+    display: flex;
+    flex-direction: column;
+
+}
+.trailer_similar{
+    background: linear-gradient(135deg, #717489 0%, #8c7daa 50%, #4e516e 100%);
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-top: 35px;
+    padding-bottom: 35px;
+    border: black solid 1px;
+    border-radius: 20px;
 }

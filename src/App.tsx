@@ -6,6 +6,7 @@ import {MainPage, MovieDetailsPage, MovieListPage} from "./pages";
 import './styles/global.css'
 
 function App() {
+
   return (
     <Routes>
        <Route path={''} element={<MainLayout/>}>

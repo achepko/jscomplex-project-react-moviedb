@@ -1,4 +1,7 @@
 .MovieList{
+    margin-top: 30px;
+    margin-bottom: 50px;
+    min-height: 600px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -6,5 +9,17 @@
     justify-content: center;
     row-gap: 10px;
     column-gap: 10px;
-    background: #d19859;
+}
+
+.MovieList_container{
+    background: linear-gradient(135deg, #717489 0%, #8c7daa 50%, #4e516e 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 35px;
+    padding-bottom: 35px;
+    border: black solid 1px;
+    border-radius: 20px;
 }

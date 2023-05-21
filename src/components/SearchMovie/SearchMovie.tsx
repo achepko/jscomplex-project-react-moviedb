@@ -1,9 +1,10 @@
 import { FC } from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 
-import {useAppDispatch, useAppSelector} from "../../hooks";
+import {useAppDispatch} from "../../hooks";
 import {movieActions} from "../../redux";
 import {useNavigate} from "react-router-dom";
+import css from './SearchMovie.module.css'
 
 
 interface SearchFormData {
@@ -26,9 +27,9 @@ const SearchMovie: FC = () => {
 
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <input type="text" placeholder={'query'} {...register('query')} />
-            <button type="submit" >Search</button>
+        <form onSubmit={handleSubmit(onSubmit)} className={css.SearchMovie}>
+            <input type="text" placeholder={'Search your movie...'} {...register('query')} />
+            <button type="submit" >SEARCH</button>
         </form>
     );
 };

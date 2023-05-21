@@ -4,8 +4,10 @@ import {useNavigate} from "react-router-dom";
 import css from './Header.module.css'
 import {useAppDispatch} from "../../hooks";
 import {movieActions} from "../../redux";
-import {ThemeSwitcher} from "../ThemeSwitcher/ThemeSwitcher";
-import {SearchMovie} from "../SearchMovie/SearchMovie";
+import {ThemeSwitcher} from "../ThemeSwitcher";
+import {SearchMovie} from "../SearchMovie";
+import {GenreList} from "../GenreList";
+import {Button} from "@mui/material";
 
 
 const Header: FC = () => {
@@ -15,21 +17,27 @@ const Header: FC = () => {
 
     const handleMovieListClick = () => {
         dispatch(movieActions.resetPage());
-        dispatch(movieActions.setCurrentQuery(''))
+        dispatch(movieActions.setCurrentQuery(''));
         navigate("/discover/movie?page=1");
     };
 
     return (
         <div className={css.Header}>
-            <div> <img src='/logo okten.jfif' alt="oktenLogo" width="80" height="80" style={{ borderRadius: '50%' }}/></div>
+            <button onClick={()=>navigate('/')} className={css.home_button}>
+                <img src='/logo okten.jfif' alt="oktenLogo" width="80" height="80" style={{ borderRadius: '50%' }}/>
+            </button>
             <ThemeSwitcher/>
-            <button onClick={()=>navigate('/')}>Main page</button>
-            <button onClick={handleMovieListClick}>MovieList</button>
+            <Button
+                aria-controls="genre-menu"
+                aria-haspopup="true"
+                variant="contained"
+                onClick={handleMovieListClick}>
+                Movie List
+            </Button>
+            <GenreList/>
             <div><SearchMovie/></div>
             <div>
                 <img src='/profile.avif' alt="userProfile" width="60" height="60" style={{ borderRadius: '50%' }}/>
-                <br/>
-                <span>UserProfile</span>
             </div>
         </div>
     );

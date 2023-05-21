@@ -3,17 +3,17 @@ import React, {FC, useEffect} from "react";
 import css from './MovieTopRated.module.css'
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {movieActions} from "../../redux";
-import {MovieListCard} from "../MovieListCard/MovieListCard";
-import {PaginationMoviesTopRated} from "../PaginationMoviesTopRated/PaginationMoviesTopRated";
+import {MovieListCard} from "../MovieListCard";
+import {PaginationMoviesTopRated} from "../PaginationMoviesTopRated";
 
 const MovieTopRated: FC = () => {
 
-
-    let {topRatedMovies, currentPage} = useAppSelector(state => state.movies);
+    let {topRatedMovies,currentPage} = useAppSelector(state => state.movies);
     let dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(movieActions.getTopRatedMovies(currentPage));
+
     }, [dispatch, currentPage])
 
     return (

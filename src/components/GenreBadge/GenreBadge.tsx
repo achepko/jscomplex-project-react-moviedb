@@ -9,13 +9,14 @@ interface IProps {
 }
 
 const GenreBadge: FC<IProps> = ({genre_ids}) => {
+
     const {genres} = useAppSelector((state) => state.genres);
 
     const MovieGenreBadge = () => {
         const genresArray = genres ? genres : [];
         return (
             <div className={css.badge}>
-                {genresArray.map((genre) => {
+                {genresArray && genresArray.map((genre) => {
                     if (genre_ids.includes(genre.id)) {
                         return  (<Badge className={css.genre}
                             key={genre.id}
@@ -32,6 +33,7 @@ const GenreBadge: FC<IProps> = ({genre_ids}) => {
 
     return <div>{MovieGenreBadge()}</div>;
 };
+
 
 export {GenreBadge};
 

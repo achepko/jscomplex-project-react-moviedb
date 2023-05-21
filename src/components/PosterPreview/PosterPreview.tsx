@@ -2,7 +2,7 @@ import {FC} from "react";
 
 import {posterURL} from "../../constants";
 import css from './PosterPreview.module.css'
-import {GenreBadge} from "../GenreBadge/GenreBadge";
+import {GenreBadge} from "../GenreBadge";
 
 interface IMoviePosterProps {
     src: string,

@@ -1,49 +1,37 @@
-import {FC, useEffect} from "react";
-
-import {useAppDispatch, useAppSelector} from "../../hooks";
-import {movieActions} from "../../redux";
+import {FC, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import {Header} from "../Header/Header";
-import {Footer} from "../Footer/Footer";
+
+import {Header} from "../Header";
+import {Footer} from "../Footer";
 import {posterURL} from "../../constants";
-import {StarsRating} from "../StarsRating/StarsRating";
-import {MovieInfoTrailer} from "../MovieInfoTrailer/MovieInfoTrailer";
-import {MovieInfoSimilar} from "../MovieInfoSimilar/MovieInfoSimilar";
+import {StarsRating} from "../StarsRating";
+import {MovieInfoTrailer} from "../MovieInfoTrailer";
+import {MovieInfoSimilar} from "../MovieInfoSimilar";
 import css from './MovieInfo.module.css'
+import {IMovieDetails} from "../../interfaces";
+import {movieService} from "../../services";
 
-
-interface IParam {
-    [key: string]: string;
-    id: string;
-}
 
 const MovieInfo: FC = () => {
 
-    let {movieInfo} = useAppSelector(state => state.movies);
-    let {id} = useParams<IParam>();
-    let dispatch = useAppDispatch();
-    const {vote_average, vote_count} = movieInfo;
+    const [movieInfo,setMovieInfo] = useState<IMovieDetails>({} as IMovieDetails);
+    const {id} = useParams<{ id: string }>();
 
     useEffect(() => {
-        if (id) {
-            dispatch(movieActions.getMovieById(id))
-            dispatch(movieActions.resetKey)
-        }
-    }, [dispatch, id])
+              movieService.getMovieById(id!.toString()).then(value => value.data).then(value => setMovieInfo(value))
+    }, [id])
 
     return (
         <div>
             <Header/>
-            <hr/>
             {movieInfo && (
-                <div>
+                <div className={css.MovieInfo_container}>
                     <div className={css.poster_info}>
-                        <div>
+                        <div className={css.poster}>
                             <img src={movieInfo.poster_path && `${posterURL}/${movieInfo.poster_path}`} alt={movieInfo.title} width='300'/>
-                            <StarsRating key={id} vote_average={vote_average} vote_count={vote_count}/>
+                            <StarsRating key={id} vote_average={movieInfo.vote_average} vote_count={movieInfo.vote_count}/>
                         </div>
-
-                        <div>
+                        <div className={css.movie_info}>
                             {movieInfo.title && <h1>{movieInfo.title}</h1>}
                             {movieInfo.original_title && <p>{movieInfo.original_title}</p>}
                             {movieInfo.release_date && (
@@ -69,15 +57,14 @@ const MovieInfo: FC = () => {
                             )}
                             {movieInfo.runtime && <p>Duration: {movieInfo.runtime} min.</p>}
                             {movieInfo.overview && <p>{movieInfo.overview}</p>}
-                            <button>Add to Wish List</button>
                         </div>
                     </div>
                 </div>
             )}
-            <hr/>
-            <MovieInfoTrailer key={id} id={id}/>
-            <hr/>
-            <MovieInfoSimilar key={id} id={id}/>
+            <div className={css.trailer_similar}>
+                <MovieInfoTrailer/>
+                <MovieInfoSimilar/>
+            </div>
             <Footer/>
         </div>
 
@@ -85,3 +72,4 @@ const MovieInfo: FC = () => {
 };
 
 export {MovieInfo};
+

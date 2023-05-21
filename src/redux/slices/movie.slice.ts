@@ -101,6 +101,20 @@ const getSimilarMoviesById = createAsyncThunk<IMoviesService, number>(
     }
 )
 
+const getMoviesByGenreId = createAsyncThunk<IMoviesService, number>(
+    'movieSlice/getMoviesByGenreId',
+    async (id, {rejectWithValue}) => {
+        try {
+            let {data} = await movieService.getMoviesByGenreId(id);
+            return data
+
+        } catch (e) {
+            const error = e as AxiosError;
+            return rejectWithValue(error.message)
+        }
+    }
+)
+
 const getTopRatedMovies = createAsyncThunk<IMoviesService, number>(
     'movieSlice/getPopularMovies',
     async (currentPage, {rejectWithValue}) => {
@@ -174,6 +188,9 @@ let slice = createSlice({
             .addCase(getSimilarMoviesById.fulfilled,(state, action)=>{
                 state.similarMovies = action.payload.results
             })
+            .addCase(getMoviesByGenreId.fulfilled,(state, action)=>{
+                state.movies = action.payload.results
+            })
             .addCase(getTopRatedMovies.fulfilled, (state, action) => {
                 state.topRatedMovies = action.payload.results
                 state.total_pages = action.payload.total_pages <= 500 ? action.payload.total_pages : 500;
@@ -207,7 +224,8 @@ const movieActions = {
     getTopRatedMovies,
     searchMovies,
     getNowPlayingMovies,
-    getSimilarMoviesById
+    getSimilarMoviesById,
+    getMoviesByGenreId
 }
 
 export {
